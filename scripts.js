@@ -48,10 +48,11 @@ card.innerHTML = `
     <button class="close-btn" title="Stäng">✖</button>
         <h2>${foundKey}</h2>
         <p>${data.icon} ${data.description}</p>
-        <p>${data.tempC}°C</p>
-        <small>Uppdaterad: ${data.updated}</small> 
+        <p class="temp">${data.tempC}°C</p>
+        <small class="updated">Uppdaterad: ${data.updated} </small> 
     </div>
   `;
+
 result.prepend(card);
 
 const closeBtn = card.querySelector(".close-btn");
@@ -74,3 +75,18 @@ cityInput.addEventListener("keydown", (e) => {
     }
 });
 
+
+function updateWeatherCards() {
+  const cards = document.querySelectorAll(".weathercard");
+  cards.forEach((card) => {
+    const city = card.getAttribute("data-city");
+    const data = MOCK_WEATHER[city];
+    if (!data) return;
+
+    card.querySelector("p:nth-of-type(1)").innerHTML = `${data.icon} ${data.description}`;
+    card.querySelector("p:nth-of-type(2)").textContent = `${data.tempC}°C`;
+    card.querySelector("small").textContent = `Uppdaterad: ${data.updated}`;
+  });
+}
+
+setInterval(updateWeatherCards, 10000);

@@ -5,14 +5,17 @@
 }
 
 html, body {
-    height: 100%;
+    height: auto;
+    min-height: 100vh;
 }
 
 body {
    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, 'sans-serif'; 
     background: linear-gradient(to bottom, #327D96, #37C9FA, #ffffff);
+    background-attachment: fixed; 
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
-
     flex-direction: column;
     align-items: center;
 }
@@ -64,6 +67,7 @@ button:hover {
     height: fit-content;
     text-align: center;
     position: relative;
+    margin-bottom: 1rem;
 }
  
 
