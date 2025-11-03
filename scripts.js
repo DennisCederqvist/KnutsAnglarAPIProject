@@ -61,9 +61,15 @@ if (!foundKey) {
 const existingErr = document.getElementById("weatherError");
     if (existingErr) existingErr.hidden = true;
 
+const existingCard = result.querySelector(`[data-city="${foundKey}"]`);
+  if (existingCard) {
+    existingCard.remove(); // Ta bort gamla kortet innan vi lägger till nytt
+  }
+
 const data = MOCK_WEATHER [foundKey];
 const card = document.createElement("div");
 card.classList.add("weathercard");
+card.setAttribute("data-city", foundKey);
 card.innerHTML = `
     <div class="weather">
         <h2>${foundKey}</h2>
@@ -72,7 +78,7 @@ card.innerHTML = `
         <small>Uppdaterad: ${data.updated}</small> 
     </div>
   `;
-  result.appendChild(card);
+  result.prepend(card);
   result.classList.remove("hidden");
   cityInput.value = "";
 
