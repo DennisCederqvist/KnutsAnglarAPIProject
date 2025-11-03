@@ -76,3 +76,17 @@ cityInput.addEventListener("keydown", (e) => {
 });
 
 
+function updateWeatherCards() {
+  const cards = document.querySelectorAll(".weathercard");
+  cards.forEach((card) => {
+    const city = card.getAttribute("data-city");
+    const data = MOCK_WEATHER[city];
+    if (!data) return;
+
+    card.querySelector("p:nth-of-type(1)").innerHTML = `${data.icon} ${data.description}`;
+    card.querySelector("p:nth-of-type(2)").textContent = `${data.tempC}°C`;
+    card.querySelector("small").textContent = `Uppdaterad: ${data.updated}`;
+  });
+}
+
+setInterval(updateWeatherCards, 10000);
