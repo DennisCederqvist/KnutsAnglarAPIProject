@@ -6,28 +6,6 @@ MOCK_WEATHER = {
 "Lund": { tempC: 9, description: "Halvklart", icon: "⛅", updated: "09:00" }
 };
 
-// const searchBtn = document.getElementById("searchBtn");
-// const cityInput = document.getElementById("cityInput");
-// const result = document.getElementById("weatherResult");
-
-// searchBtn.addEventListener("click", () => {
-// const city = cityInput.value.trim();
-// if (!MOCK_WEATHER[city]) {
-// result.innerHTML = "<p>Staden finns inte i systemet.</p>";
-// result.classList.remove("hidden");
-// return;
-// }
-// const data = MOCK_WEATHER[city];
-// result.innerHTML = `
-// <h2>${city}</h2>
-// <p>${data.icon} ${data.description}</p>
-// <p>${data.tempC}°C</p>
-// <small>Uppdaterad: ${data.updated}</small>
-// `;
-// result.classList.remove("hidden");
-// });
-
-
 const searchBtn = document.getElementById("searchBtn");
 const cityInput = document.getElementById("cityInput");
 const result = document.getElementById("weatherResult");
@@ -43,7 +21,7 @@ if (!foundKey) {
       err = document.createElement("p");
       err.id = "weatherError";
       err.className = "error";
-      result.prepend(err); // put error above cards
+      result.prepend(err);
     }
     err.textContent = "⚠️ Staden finns inte i systemet.";
     err.style.color ="red";
@@ -52,11 +30,6 @@ if (!foundKey) {
     cityInput.value = "";
     return;
   }
-
-// const oldMsg = result.querySelector("p");
-// if(oldMsg && oldMsg.textContent.includes("Staden finns inte")) {
-//     oldMsg.remove();
-// }
 
 const existingErr = document.getElementById("weatherError");
     if (existingErr) existingErr.hidden = true;
