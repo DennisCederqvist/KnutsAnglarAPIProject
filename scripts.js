@@ -38,10 +38,28 @@ function showWeather(){
 );
 
 if (!foundKey) {
-    result.innerHTML = "<p>Staden finns inte i systemet.</p>";
+    let err = document.getElementById("weatherError");
+    if (!err) {
+      err = document.createElement("p");
+      err.id = "weatherError";
+      err.className = "error";
+      result.prepend(err); // put error above cards
+    }
+    err.textContent = "⚠️ Staden finns inte i systemet.";
+    err.style.color ="red";
+    err.hidden = false;
     result.classList.remove("hidden");
+    cityInput.value = "";
     return;
-}
+  }
+
+// const oldMsg = result.querySelector("p");
+// if(oldMsg && oldMsg.textContent.includes("Staden finns inte")) {
+//     oldMsg.remove();
+// }
+
+const existingErr = document.getElementById("weatherError");
+    if (existingErr) existingErr.hidden = true;
 
 const data = MOCK_WEATHER [foundKey];
 const card = document.createElement("div");
