@@ -48,10 +48,11 @@ card.innerHTML = `
     <button class="close-btn" title="Stäng">✖</button>
         <h2>${foundKey}</h2>
         <p>${data.icon} ${data.description}</p>
-        <p>${data.tempC}°C</p>
-        <small>Uppdaterad: ${data.updated}</small> 
+        <p class="temp">${data.tempC}°C</p>
+        <small class="updated">Uppdaterad: ${data.updated} </small> 
     </div>
   `;
+
 result.prepend(card);
 
 const closeBtn = card.querySelector(".close-btn");
@@ -73,4 +74,5 @@ cityInput.addEventListener("keydown", (e) => {
         showWeather();
     }
 });
+
 
