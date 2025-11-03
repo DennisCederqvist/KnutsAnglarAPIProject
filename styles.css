@@ -13,5 +13,41 @@ body {
     background: linear-gradient(to bottom, #327D96, #37C9FA, #ffffff);
     display: flex;
     justify-content: center;
+
 }
+
+.header {
+    color: #000000;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 20px;
+    width: 400px;
+    height: fit-content;
+    text-align: center;
+}
+
+input {
+    padding: 0.2rem;
+    border: 1px solid #000768;
+    border-radius: 5px 1px 5px 1px;
+    width: 60%;
+}
+
+button {
+    background-color: #fff;
+    padding: 0.2rem 1rem;
+    border-radius: 5px 1px 5px 1px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #327D96;
+}
+
+.card {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 10px;
+}
+ 
 

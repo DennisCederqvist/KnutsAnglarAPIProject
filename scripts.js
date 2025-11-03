@@ -4,9 +4,7 @@ MOCK_WEATHER = {
 "Malmö": { tempC: 10, description: "Klart", icon: "☀️", updated: "09:00" },
 "Uppsala": { tempC: 6, description: "Disigt", icon: "🌫️", updated: "09:00" },
 "Lund": { tempC: 9, description: "Halvklart", icon: "⛅", updated: "09:00" }
-
 };
-
 
 // const searchBtn = document.getElementById("searchBtn");
 // const cityInput = document.getElementById("cityInput");
@@ -63,3 +61,4 @@ cityInput.addEventListener("keydown", (e) => {
         showWeather();
     }
 });
+
