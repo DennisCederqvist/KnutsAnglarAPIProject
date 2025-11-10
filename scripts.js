@@ -47,7 +47,11 @@ async function showWeather(){
       <p> 🌡️ ${data.temperature}°C</p>
       <p> ${desc}</p>
       <p>💨 ${data.windspeed} m/s</p>
-      <small>Uppdaterad: ${new Date(data.time).toLocaleTimeString("sv-SE")}</small>
+      <small>Uppdaterad: ${new Date(data.time).toLocaleTimeString('sv-SE', {
+                hour: '2-digit',
+                minute: '2-digit'
+            })
+          }</small>
     </div>
   `;
   result.prepend(card);
