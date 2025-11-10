@@ -12,6 +12,7 @@ const result = document.getElementById("weatherResult");
 
 function showWeather(){
     const city = cityInput.value.trim().toLowerCase();
+    getWeatherByCity(city);
     const foundKey = Object.keys(MOCK_WEATHER).find((key) => key.toLowerCase() === city 
 );
 
@@ -90,3 +91,18 @@ function updateWeatherCards() {
 }
 
 setInterval(updateWeatherCards, 10000);
+
+async function getWeatherByCity(cityName) {
+  try {
+    const geoCor = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=10&language=en&format=json`);
+    const geoData = await geoCor.json();
+
+    const swedishResult = geoData.results.find(r => r.country_code === "SE");
+    console.log("Swedish Geocoding Result:", swedishResult);
+    return swedishResult;
+  }
+  
+  catch (error) {
+    console.error("Error fetching weather data:", error);
+  }
+}
