@@ -8,7 +8,6 @@ const result = document.getElementById("weatherResult");
 async function showWeather(){
     const city = cityInput.value.trim().toLowerCase();
     const data = await getWeatherByCity(city);
-    const desc = weatherCode(data.weathercode);
       if (!data) {
         let err = document.getElementById("weatherError");
       if (!err) {
@@ -30,6 +29,8 @@ async function showWeather(){
 
     return;
   }
+
+  const desc = weatherCode(data.weathercode);
 
   const existingCard = result.querySelector(`[data-city="${data.name}"]`);
     if (existingCard) {
