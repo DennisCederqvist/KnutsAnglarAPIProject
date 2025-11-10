@@ -13,17 +13,23 @@ async function showWeather(){
         err = document.createElement("p");
         err.id = "weatherError";
         err.className = "error";
-        result.prepend(err);
+        // result.prepend(err);
     }
     err.textContent = "⚠️ Staden finns inte i systemet.";
     err.style.color = "red";
     err.hidden = false;
+    result.prepend(err);
     result.classList.remove("hidden");
     cityInput.value = "";
-    return;
-    }
 
-  const existingCard = result.querySelector(`[data-city="${city}"]`);
+    setTimeout(() => {
+      err.hidden = true;
+    }, 3000);
+
+    return;
+  }
+
+  const existingCard = result.querySelector(`[data-city="${data.name}"]`);
     if (existingCard) {
       existingCard.remove();
     }
