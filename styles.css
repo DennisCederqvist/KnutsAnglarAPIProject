@@ -106,3 +106,19 @@ h1 {
   color: black;
   transition: color 0.2s ease;
 }
+
+.weathercard:focus {
+  outline: 3px solid #004b87;
+  outline-offset: 5px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

@@ -38,37 +38,50 @@ async function showWeather(){
       existingCard.remove();
     }
 
-  const card = document.createElement("div");
-  card.classList.add("weathercard");
-  card.setAttribute("data-city", data.name);
-  card.innerHTML = `
-    <div class="weather">
-      <button class="close-btn" title="Stäng">✖</button>
-      <h2>${data.name}</h2>
-      <p> 🌡️ ${data.temperature}°C</p>
-      <p> ${desc}</p>
-      <p>💨 ${data.windspeed} m/s</p>
-      <small>Uppdaterad: ${new Date(data.time).toLocaleTimeString('sv-SE', {
-                hour: '2-digit',
-                minute: '2-digit'
-            })
-          }</small>
-    </div>
-  `;
-  result.prepend(card);
+const card = document.createElement("div");
+card.classList.add("weathercard");
+card.setAttribute("data-city", data.name);
 
-  const closeBtn = card.querySelector(".close-btn");
-  closeBtn.addEventListener("click", () => {
-    card.style.opacity = "0";
-    setTimeout(() => card.remove(), 300);
-  });
+// --- Skapa stängknapp (synlig men separat) ---
+const closeBtn = document.createElement("button");
+closeBtn.classList.add("close-btn");
+closeBtn.setAttribute("title", `Stäng kortet för ${data.name}`);
+closeBtn.setAttribute("aria-label", `Stäng kortet för ${data.name}`);
+closeBtn.innerHTML = `<span aria-hidden="true">✖</span>`;
 
-    result.classList.remove("hidden");
-    cityInput.value = "";
+// --- Skapa själva väderregionen ---
+const region = document.createElement("div");
+region.classList.add("weather");
+region.setAttribute("role", "region");
+region.setAttribute("tabindex", "0");
+region.setAttribute("aria-labelledby", `title-${data.name}`);
+region.setAttribute("aria-describedby", `desc-${data.name}`);
 
-    saveData();
+region.innerHTML = `
+  <h2 id="title-${data.name}" aria-hidden="true">${data.name}</h2>
+  <p aria-hidden="true">🌡️ ${data.temperature}°C</p>
+  <p aria-hidden="true">${data.description}</p>
+  <p aria-hidden="true">💨 ${data.windspeed} m/s</p>
+  <span id="desc-${data.name}" class="sr-only">
+    ${data.temperature} grader, ${data.description}, ${data.windspeed} meter per sekund vind.
+  </span>
+`;
+
+// --- Bygg ihop kortet ---
+card.appendChild(region);
+card.appendChild(closeBtn);
+result.prepend(card);
+
+// --- Knappfunktion ---
+closeBtn.addEventListener("click", () => {
+  card.style.opacity = "0";
+  setTimeout(() => card.remove(), 300);
+});
+
+result.classList.remove("hidden");
+cityInput.value = "";
+saveData();
 }
-
 
 searchBtn.addEventListener("click", showWeather);
 
