@@ -42,14 +42,14 @@ const card = document.createElement("div");
 card.classList.add("weathercard");
 card.setAttribute("data-city", data.name);
 
-// --- Skapa stängknapp (synlig men separat) ---
+// Skapar stängknapp
 const closeBtn = document.createElement("button");
 closeBtn.classList.add("close-btn");
 closeBtn.setAttribute("title", `Stäng kortet för ${data.name}`);
 closeBtn.setAttribute("aria-label", `Stäng kortet för ${data.name}`);
 closeBtn.innerHTML = `<span aria-hidden="true">✖</span>`;
 
-// --- Skapa själva väderregionen ---
+// Skapar själva väderregionen
 const region = document.createElement("div");
 region.classList.add("weather");
 region.setAttribute("role", "region");
@@ -67,12 +67,12 @@ region.innerHTML = `
   </span>
 `;
 
-// --- Bygg ihop kortet ---
+// Bygger ihop kortet
 card.appendChild(region);
 card.appendChild(closeBtn);
 result.prepend(card);
 
-// --- Knappfunktion ---
+// Knapp
 closeBtn.addEventListener("click", () => {
   card.style.opacity = "0";
   setTimeout(() => card.remove(), 300);

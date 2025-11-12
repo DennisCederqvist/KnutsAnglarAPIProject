@@ -27,14 +27,14 @@ cards.forEach(data => {
   card.classList.add("weathercard");
   card.setAttribute("data-city", data.city);
 
-  // --- Skapa stängknappen (utanför regionen) ---
+  // Skapa stängknappen
   const closeBtn = document.createElement("button");
   closeBtn.classList.add("close-btn");
   closeBtn.setAttribute("title", `Stäng kortet för ${data.city}`);
   closeBtn.setAttribute("aria-label", `Stäng kortet för ${data.city}`);
   closeBtn.innerHTML = `<span aria-hidden="true">✖</span>`;
 
-  // --- Skapa själva väderregionen ---
+  // Skapa själva väderregionen
   const region = document.createElement("div");
   region.classList.add("weather");
   region.setAttribute("role", "region");
@@ -52,16 +52,16 @@ cards.forEach(data => {
     </span>
   `;
 
-  // --- Bygg ihop kortet ---
+  // Bygg ihop kortet
 card.appendChild(region);
 card.appendChild(closeBtn);
 
   weatherResult.prepend(card);
 
-  // --- Knappfunktion ---
+  // Knapp
   closeBtn.addEventListener("click", () => {
     card.remove();
-    saveData(); // spara ändringen
+    saveData(); 
   });
 });
 }
