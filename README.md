@@ -32,7 +32,9 @@ I den här versionen används påhittad väderdata (mock-data) för att testa ap
 - Bakgrunden har en blå gradient som liknar himlen.  
 - Innehållet är centrerat och väderkorten har rundade hörn och skuggor.  
 - Knapparna ändrar färg när man håller musen över dem.  
-- Loggan (en sol) ligger högst upp och har en lätt flytande animation.  
+- Loggan (en sol) ligger högst upp och har en lätt flytande animation. 
+
+<img src="./imgs/wireframe.png" width="200px">
 
 
 
