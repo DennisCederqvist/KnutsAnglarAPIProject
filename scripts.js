@@ -1,13 +1,15 @@
-import { weatherCode } from './weatherCode.js';
-import { saveData, showData } from './saveLocal.js';
-import { WeatherCard } from "./weatherCard.js";
+import { saveData, showData, setManager } from './saveLocal.js';
 import { WeatherService } from "./weatherByCity.js";
+import { WeatherCardManager } from "./weatherCardManager.js";
 
-const service = new WeatherService();
-
+const result = document.getElementById("weatherResult");
 const searchBtn = document.getElementById("searchBtn");
 const cityInput = document.getElementById("cityInput");
-const result = document.getElementById("weatherResult");
+
+const manager = new WeatherCardManager(result);
+setManager(manager);
+
+const service = new WeatherService();
 
 searchBtn.addEventListener("click", showWeather);
 
@@ -17,49 +19,24 @@ cityInput.addEventListener("keydown", (e) => {
     }
 });
 
-async function updateWeatherCards() {
-  const cards = document.querySelectorAll(".weathercard");
-
-  for (const cardElement of cards) {
-    const city = cardElement.getAttribute("data-city");
-    const data = await service.getWeatherByCity(city);
-
-    if (!data) continue;
-
-    // Uppdatera DOM-elementen direkt
-    const fields = cardElement.querySelectorAll("p");
-    fields[0].textContent = `🌡️ ${data.temperature}°C`;
-    fields[1].textContent = weatherCode(data.weathercode);
-    fields[2].textContent = `💨 ${data.windspeed} m/s`;
-
-    let small = cardElement.querySelector("small");
-    if (!small) {
-      small = document.createElement("small");
-      cardElement.appendChild(small);
-    }
-    small.textContent = `Uppdaterad: ${new Date(data.time).toLocaleTimeString("sv-SE")}`;
-  }
-}
-
 async function showWeather() {
     const city = cityInput.value.trim().toLowerCase();
     const data = await service.getWeatherByCity(city);
 
     if (!data) {
-      showError("⚠️ Staden finns inte i systemet.");
-    return;
+        showError("⚠️ Staden finns inte i systemet");
+        return;
     }
 
-    // Ta bort gammalt kort om staden redan finns
-    const existingCard = result.querySelector(`[data-city="${data.name}"]`);
-    if (existingCard) existingCard.remove();
+    manager.addCard(data);
+    saveData();  
 
-    // Skapa kort via klassen
-    const card = new WeatherCard(data);
-    card.render(result);
-
-    saveData();
     cityInput.value = "";
+}
+
+async function updateWeatherCards() {
+    await manager.updateAll();
+    saveData(); 
 }
 
 function showError(msg) {
@@ -83,8 +60,7 @@ function showError(msg) {
     }, 3000);
 }
 
-//visar sparad data från lokal när sidan laddas
 window.addEventListener("DOMContentLoaded", showData);
-//Uppdateras var 5:e minut
-setInterval(updateWeatherCards, 300000);
 
+// Uppdateras var 5:e minut
+setInterval(updateWeatherCards, 300000);
