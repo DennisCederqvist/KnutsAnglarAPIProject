@@ -13,6 +13,10 @@ export class WeatherCard {
     card.setAttribute("data-weathercode", this.data.weathercode);
 
 
+//bakgroundbild beroende på vädret
+    const weather = weatherCode(this.data.weathercode);
+    card.style.backgroundImage = `url(${weather.background})`;
+
     const region = document.createElement("div");
     region.classList.add("weather");
 
@@ -25,11 +29,11 @@ export class WeatherCard {
     region.innerHTML = `
         <h2 id="title-${this.data.name}" aria-hidden="true">${this.data.name}</h2>
         <p aria-hidden="true">🌡️ ${this.data.temperature}°C</p>
-        <p aria-hidden="true">${weatherCode(this.data.weathercode)}</p>
+        <p aria-hidden="true">${weather.description}</p>
         <p aria-hidden="true">💨 ${this.data.windspeed} m/s</p>
 
         <span id="desc-${this.data.name}" class="sr-only">
-            ${this.data.temperature} grader, ${weatherCode(this.data.weathercode)}, 
+            ${this.data.temperature} grader, ${weather.description}, 
             vind ${this.data.windspeed} meter per sekund.
         </span>
     `;
@@ -54,9 +58,15 @@ export class WeatherCard {
     update(newData) {
         this.data = newData;
 
+        //ny text och bg
+        const weather = weatherCode(newData.weathercode);
+
         const fields = this.element.querySelectorAll("p");
         fields[0].textContent = `🌡️ ${newData.temperature}°C`;
-        fields[1].textContent = weatherCode(newData.weathercode);
+        fields[1].textContent = weather.description;
         fields[2].textContent = `💨 ${newData.windspeed} m/s`;
+
+        //Uppdaterar bakgrundsbild
+        this.element.style.backgroundImage = `url(${weather.background})`;
     }
 }

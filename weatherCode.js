@@ -27,6 +27,6 @@ export function weatherCode(weatherDescription) {
         return null;
     }
 
-    return description;
+    return {description, background};
 
 }
