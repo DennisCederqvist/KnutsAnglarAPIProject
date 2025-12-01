@@ -9,6 +9,7 @@ export function saveData() {
 
   const data = manager.cards.map(card => ({
     city: card.data.name,
+    country: card.data.country,
     temperature: card.data.temperature,
     windspeed: card.data.windspeed,
     weathercode: card.data.weathercode 
@@ -26,6 +27,7 @@ export function showData() {
   cards.forEach(data => {
     manager.addCard({
       name: data.city,
+      country: data.country,
       temperature: Number(data.temperature),
       windspeed: Number(data.windspeed),
       weathercode: Number(data.weathercode) 

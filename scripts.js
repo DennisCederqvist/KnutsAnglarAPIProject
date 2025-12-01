@@ -144,10 +144,6 @@ li.addEventListener("click", async () => {
     saveData();
 
     cityInput.value = "";
-    if (typeof selectedCity !== "undefined") {
-        selectedCity = null;
-    }
-
   } catch (err) {
     console.error(err);
     showError("Något gick fel när vädret skulle hämtas.");
