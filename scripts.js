@@ -12,7 +12,10 @@ const manager = new WeatherCardManager(result);
 setManager(manager);
 
 const service = new WeatherService();
+
 let selectedCity = null;
+let currentCities = [];
+let highlightedIndex = -1;
 
 searchBtn.addEventListener("click", showWeather);
 
