@@ -40,26 +40,28 @@ cityInput.addEventListener("input", handleCityInput);
 // }
 
 async function showWeather() {
-  const inputValue = cityInput.value.trim();
-  if (!inputValue) return;
+    const inputValue = cityInput.value.trim();
+    if (!inputValue) return;
 
-  let weather;
+    let weather;
 
-  if (selectedCity) {
+    if (selectedCity) {
     weather = await service.getWeatherByLocation(selectedCity);
-  } else {
+    } else {
     weather = await service.getWeatherByCity(inputValue);
-  }
+    }
 
-  if (!weather) {
+    if (!weather) {
     showError("Staden hittades inte.");
     return;
-  }
+    }
 
-  manager.addCard(weather);
-  saveData();
+    manager.addCard(weather);
+    saveData();
 
-  selectedCity = null;
+    cityInput.value = "";
+    selectedCity = null;
+    clearCityDropdown();
 }
 
 async function updateWeatherCards() {
@@ -140,6 +142,12 @@ li.addEventListener("click", async () => {
 
     manager.addCard(weather);
     saveData();
+
+    cityInput.value = "";
+    if (typeof selectedCity !== "undefined") {
+        selectedCity = null;
+    }
+
   } catch (err) {
     console.error(err);
     showError("Något gick fel när vädret skulle hämtas.");
