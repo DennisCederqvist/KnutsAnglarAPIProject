@@ -217,3 +217,8 @@ h1 {
 .city-dropdown li:hover {
   background-color: rgba(0, 75, 135, 0.1);
 }
+
+.city-dropdown li:focus {
+  outline: none;
+  background-color: rgba(0, 75, 135, 0.25);
+}
